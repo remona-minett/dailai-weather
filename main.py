@@ -8,8 +8,8 @@ from random import seed
 
 wt = ["sunny", "partly cloudy", "cloudy", "light snow", "snow", "heavy snow"] # weather types
 lt = ["bright", "moody", "dim", "dark", "pitchblack"] # light types
-st = ["summer", "fall", "winter", "spring"] # season types349
-stdmonths = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
+stdmonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+stdmonthsabbr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 # dlimonths = [] # dailai months
 srv = ["aurora", "persephone"]
 year = [442, 643] # amount to be added to the current year, to show the correct date
@@ -81,18 +81,25 @@ while i < 7:
         nm = True
     i += 1
     
-    
-print(f"{cd} {cm} {cy}")
+
 cm = stdmonths[cm - 1] # grab the current month
-print(f"{cm}")
-if nm == True: # if we need to roll over to the next month - last 6 days of december specific code
+print(f"Forecast beginning {cm} {cd} {cy}")
+if nm == True: # if we need to roll over to the next month also some last 6 days of december specific code
     cm = datetime.now().month + 1
     if cm == 13: # no 13th month
         cm = 1
     cm = stdmonths[cm - 1] # grab the next month
-    print(f"{cm}")
+    print(f"As well as the beginning of {cm}")
 
-print(f"{tl}")
-print(f"{wl}")
-print(f"{ll}")
-print(f"{dl}")
+dl.insert(0, 'Day:')
+tl.insert(0, 'Temperature:')
+wl.insert(0, 'Weather:')
+ll.insert(0, 'Light Level:')
+
+data = [dl, tl, wl, ll] # organize data for displaying in table
+
+# first map each string to formatted string with white space 
+lists = [list(map(lambda item: f'{item:<15}', inner_list)) for inner_list in data]
+#then join them 
+lists = [''.join(item) for item in lists]
+print('\n'.join(lists))

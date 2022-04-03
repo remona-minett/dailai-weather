@@ -1,8 +1,10 @@
 import os
 import math
 import random
-from random import seed
+import calendar
 from datetime import datetime
+from random import seed
+
 
 wt = ["sunny", "partly cloudy", "cloudy", "light snow", "snow", "heavy snow"] # weather types
 lt = ["bright", "moody", "dim", "dark", "pitchblack"] # light types
@@ -16,13 +18,15 @@ sc = "" # server choice - affects what year is shown
 cd = datetime.now().day # current dmy for weather times
 cm = datetime.now().month
 cy = datetime.now().year
+dim = calendar.monthrange(cy, cm)[1] # days in month
 temp_scale = 100
 temp_offset_x = -14
 temp_offset_y = -20
-i = 0
 tl = [] # temp list init
 wl = [] # weather list init
 ll = [] # light list init
+dl = [] # day list - next calendar days
+nm = False # roll over to next month in text
 
 os.system('cls||clear')
 
@@ -30,10 +34,8 @@ print(f"Dailai Weather Forecast Generator") # version 1.0.0
 
 rs = input("Enter a seed: ")
 if rs == "": 
-    rs = random() # if you don't enter a seed, it'll create one for you.
+    rs = random.random() # if you don't enter a seed, it'll create one for you.
 seed(rs) # set the seed for future use
-
-
 
 while tu.lower() not in {'f', 'c'}:
     tu = input("Select a temperature unit, F or C: ")
@@ -46,6 +48,7 @@ if sc.lower() == 'persephone' or 'p':
 else:
     cy = cy + 442
 
+i = 0
 while i < 7: # assigning a var in a list to each day's temperature
     temp_random = random.randint(-5, 5)
     current_temperature = temp_scale*(math.sin((temp_offset_x+(cm*math.pi))/6)/math.pi)+temp_offset_y+temp_random # generate temperature scale
@@ -62,6 +65,34 @@ while i < 7: # assigning a var in a list to each day's weather
     wl.append(var)
     i += 1
 
-print(f"{cd} {cm} {cy}") # debugging stuff
+i = 0
+while i < 7:
+    var = (random.choice(lt))
+    ll.append(var)
+    i += 1
+    
+i = 0
+while i < 7:
+    var = cd
+    dl.append(var)
+    cd += 1
+    if cd > dim: # don't have a 32nd day, etc.
+        cd = 1
+        nm = True
+    i += 1
+    
+    
+print(f"{cd} {cm} {cy}")
+cm = stdmonths[cm - 1] # grab the current month
+print(f"{cm}")
+if nm == True: # if we need to roll over to the next month - last 6 days of december specific code
+    cm = datetime.now().month + 1
+    if cm == 13: # no 13th month
+        cm = 1
+    cm = stdmonths[cm - 1] # grab the next month
+    print(f"{cm}")
+
 print(f"{tl}")
 print(f"{wl}")
+print(f"{ll}")
+print(f"{dl}")

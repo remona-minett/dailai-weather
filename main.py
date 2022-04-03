@@ -6,17 +6,7 @@ from datetime import datetime
 
 wt = ["sunny", "partly cloudy", "cloudy", "light snow", "snow", "heavy snow"] # weather types
 lt = ["bright", "moody", "dim", "dark", "pitchblack"] # light types
-st = ["summer", "fall", "winter", "spring"] # season types
-tf = [37, -42] # temperature max and min in fahrenheit for all seasons
-tc = [3, -41] # temperature max and min in celcius for all seasons
-tfsu = [37, 16] # temperature max and min in fahrenheit for summer
-tcsu = [] # temperature max and min in celcius for summer
-tff = [] # temperature max and min in fahrenheit for fall
-tcf = [] # temperature max and min in celcius for fall
-tfw = [] # temperature max and min in fahrenheit for winter
-tcw = [] # temperature max and min in celcius for winter
-tfsp = [] # temperature max and min in fahrenheit for spring
-tcsp = [] # temperature max and min in celcius for spring
+st = ["summer", "fall", "winter", "spring"] # season types349
 stdmonths = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
 # dlimonths = [] # dailai months
 srv = ["aurora", "persephone"]
@@ -30,6 +20,9 @@ temp_scale = 100
 temp_offset_x = -14
 temp_offset_y = -20
 i = 0
+tl = [] # temp list init
+wl = [] # weather list init
+ll = [] # light list init
 
 os.system('cls||clear')
 
@@ -53,11 +46,22 @@ if sc.lower() == 'persephone' or 'p':
 else:
     cy = cy + 442
 
-while i < 7:    
+while i < 7: # assigning a var in a list to each day's temperature
     temp_random = random.randint(-5, 5)
     current_temperature = temp_scale*(math.sin((temp_offset_x+(cm*math.pi))/6)/math.pi)+temp_offset_y+temp_random # generate temperature scale
-    current_temperature = math.trunc(current_temperature)
-    print(current_temperature)
+    if tu == 'c':
+        var = (current_temperature - 32) * 5.0 / 9.0 # f -> c conversion
+    else: var = (current_temperature)
+    var = math.trunc(var) # remove the decimals
+    tl.append(var)
     i += 1
 
-print(f"{cd} {cm} {cy}")
+i = 0
+while i < 7: # assigning a var in a list to each day's weather
+    var = (random.choice(wt))
+    wl.append(var)
+    i += 1
+
+print(f"{cd} {cm} {cy}") # debugging stuff
+print(f"{tl}")
+print(f"{wl}")

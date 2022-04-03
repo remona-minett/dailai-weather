@@ -80,7 +80,8 @@ while i < 7:
         cd = 1
         nm = True
     i += 1
-    
+
+os.system('cls||clear')
 
 cm = stdmonths[cm - 1] # grab the current month
 print(f"Forecast beginning {cm} {cd} {cy}")
@@ -103,3 +104,5 @@ lists = [list(map(lambda item: f'{item:<15}', inner_list)) for inner_list in dat
 #then join them 
 lists = [''.join(item) for item in lists]
 print('\n'.join(lists))
+
+input(f"\nYour seed: {rs} - Press Enter to close.")

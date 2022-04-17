@@ -30,7 +30,7 @@ nm = False # roll over to next month in text
 
 os.system('cls||clear')
 
-print(f"Dailai Weather Forecast Generator") # version 1.0.0
+print(f"Dailai Weather Forecast Generator") # version 1.0.1
 
 rs = input("Enter a seed: ")
 if rs == "": 
@@ -83,6 +83,7 @@ while i < 7:
 
 os.system('cls||clear')
 
+cd = datetime.now().day # regrab the current day for usage in the forecast
 cm = stdmonths[cm - 1] # grab the current month
 print(f"Forecast beginning {cm} {cd} {cy}")
 if nm == True: # if we need to roll over to the next month also some last 6 days of december specific code
